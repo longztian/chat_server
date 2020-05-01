@@ -6,28 +6,28 @@
 // //////////////////////////////////////////////////////////////////////
 
 /*
-The JsonCpp library's source code, including accompanying documentation, 
+The JsonCpp library's source code, including accompanying documentation,
 tests and demonstration applications, are licensed under the following
 conditions...
 
-The author (Baptiste Lepilleur) explicitly disclaims copyright in all 
-jurisdictions which recognize such a disclaimer. In such jurisdictions, 
+The author (Baptiste Lepilleur) explicitly disclaims copyright in all
+jurisdictions which recognize such a disclaimer. In such jurisdictions,
 this software is released into the Public Domain.
 
 In jurisdictions which do not recognize Public Domain property (e.g. Germany as of
 2010), this software is Copyright (c) 2007-2010 by Baptiste Lepilleur, and is
 released under the terms of the MIT License (see below).
 
-In jurisdictions which recognize Public Domain property, the user of this 
-software may choose to accept it either as 1) Public Domain, 2) under the 
-conditions of the MIT License (see below), or 3) under the terms of dual 
+In jurisdictions which recognize Public Domain property, the user of this
+software may choose to accept it either as 1) Public Domain, 2) under the
+conditions of the MIT License (see below), or 3) under the terms of dual
 Public Domain/MIT License conditions described here, as they choose.
 
 The MIT License is about as close to Public Domain as a license can get, and is
 described in clear, concise terms at:
 
    http://en.wikipedia.org/wiki/MIT_License
-   
+  
 The full text of the MIT License follows:
 
 ========================================================================
@@ -88,10 +88,10 @@ license you like.
 #ifndef JSON_VERSION_H_INCLUDED
 # define JSON_VERSION_H_INCLUDED
 
-# define JSONCPP_VERSION_STRING "1.6.1"
+# define JSONCPP_VERSION_STRING "1.6.2"
 # define JSONCPP_VERSION_MAJOR 1
 # define JSONCPP_VERSION_MINOR 6
-# define JSONCPP_VERSION_PATCH 1
+# define JSONCPP_VERSION_PATCH 2
 # define JSONCPP_VERSION_QUALIFIER
 # define JSONCPP_VERSION_HEXA ((JSONCPP_VERSION_MAJOR << 24) | (JSONCPP_VERSION_MINOR << 16) | (JSONCPP_VERSION_PATCH << 8))
 
@@ -398,14 +398,14 @@ class JSON_API Exception;
 /** Exceptions which the user cannot easily avoid.
  *
  * E.g. out-of-memory (when we use malloc), stack-overflow, malicious input
- * 
+ *
  * \remark derived from Json::Exception
  */
 class JSON_API RuntimeError;
 /** Exceptions thrown by JSON_ASSERT/JSON_FAIL macros.
  *
  * These are precondition-violations (user bugs) and internal errors (our bugs).
- * 
+ *
  * \remark derived from Json::Exception
  */
 class JSON_API LogicError;
@@ -449,7 +449,7 @@ enum CommentPlacement {
  *
  * Example of usage:
  * \code
- * Json::Value aValue( StaticString("some text") );
+ * Json::Value aValue(StaticString("some text"));
  * Json::Value object;
  * static const StaticString code("code");
  * object[code] = 1234;
@@ -716,7 +716,7 @@ Json::Value obj_value(Json::objectValue); // {}
   /// \post type() is arrayValue
   void resize(ArrayIndex size);
 
-  /// Access an array element (zero based index ).
+  /// Access an array element (zero based index).
   /// If the array contains less than index element, then null value are
   /// inserted
   /// in the array so that its size is index+1.
@@ -724,7 +724,7 @@ Json::Value obj_value(Json::objectValue); // {}
   ///  this from the operator[] which takes a string.)
   Value& operator[](ArrayIndex index);
 
-  /// Access an array element (zero based index ).
+  /// Access an array element (zero based index).
   /// If the array contains less than index element, then null value are
   /// inserted
   /// in the array so that its size is index+1.
@@ -732,12 +732,12 @@ Json::Value obj_value(Json::objectValue); // {}
   ///  this from the operator[] which takes a string.)
   Value& operator[](int index);
 
-  /// Access an array element (zero based index )
+  /// Access an array element (zero based index)
   /// (You may need to say 'value[0u]' to get your compiler to distinguish
   ///  this from the operator[] which takes a string.)
   const Value& operator[](ArrayIndex index) const;
 
-  /// Access an array element (zero based index )
+  /// Access an array element (zero based index)
   /// (You may need to say 'value[0u]' to get your compiler to distinguish
   ///  this from the operator[] which takes a string.)
   const Value& operator[](int index) const;
@@ -911,7 +911,7 @@ private:
   // struct MemberNamesTransform
   //{
   //   typedef const char *result_type;
-  //   const char *operator()( const CZString &name ) const
+  //   const char *operator()(const CZString &name) const
   //   {
   //      return name.c_str();
   //   }
@@ -1970,7 +1970,7 @@ JSON_API std::ostream& operator<<(std::ostream&, const Value& root);
 
 // @todo <= add detail about condition in exception
 # define JSON_ASSERT(condition)                                                \
-  {if (!(condition)) {Json::throwLogicError( "assert json failed" );}}
+  {if (!(condition)) {Json::throwLogicError("assert json failed");}}
 
 # define JSON_FAIL_MESSAGE(message)                                            \
   {                                                                            \

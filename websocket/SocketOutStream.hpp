@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   SocketOutStream.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on March 1, 2015, 12:24 PM
  */
@@ -69,11 +69,11 @@ public:
         {
             return type;
         }
-        
+       
         size_t size()
         {
             if(type == Type::TEXT) return str.size();
-            else if( type == Type::BINARY) return binary.size();
+            else if(type == Type::BINARY) return binary.size();
             else return file.size;
         }
 

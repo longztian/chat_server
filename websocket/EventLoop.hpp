@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   EventLoop.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on February 17, 2015, 10:27 PM
  */

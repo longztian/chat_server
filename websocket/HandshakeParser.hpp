@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   HandshakeParser.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on March 10, 2015, 10:02 PM
  */
@@ -19,7 +19,7 @@ namespace websocket {
 class HandshakeParser
 {
     using Headers = std::unordered_map<std::string, std::string>;
-    
+   
 public:
     // HTTP response status
     enum class Status
@@ -43,12 +43,12 @@ public:
     ~HandshakeParser() = default;
 
     HandshakeParser::Status parse(SocketInStream& in);
-    
+   
     std::string& getUri()
     {
         return myUri;
     }
-    
+   
     std::string& getWebSocketKey()
     {
         return myWebSocketKey;
@@ -73,7 +73,7 @@ private:
         UNKNOWN,
         GET
     };
-    
+   
     Status myValidateHeaders();
 
     State myState;

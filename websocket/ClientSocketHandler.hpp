@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   ClientSocketHandler.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on February 20, 2015, 11:19 PM
  */
@@ -78,7 +78,7 @@ private:
         State state;
         std::unique_ptr<MessageHandler> handler;
     };
-    
+   
     std::vector<Stream> streams;
     ServerApp* pServerApp;
 };

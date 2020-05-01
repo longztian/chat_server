@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   Event.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on February 17, 2015, 10:15 PM
  */
@@ -32,7 +32,7 @@ public:
     bool isIn() const;
     bool isOut() const;
     bool isError() const;
-    
+   
     static handler_t dummyEventHandler;
 
 private:

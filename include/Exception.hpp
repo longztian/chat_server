@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   Exception.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on February 16, 2015, 10:45 PM
  */

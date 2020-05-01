@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   DataFrameParser.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on March 10, 2015, 10:02 PM
  */
@@ -55,9 +55,9 @@ public:
     ~DataFrameParser() = default;
 
     Status parse(SocketInStream& in);
-    
+   
     size_t getData(std::unique_ptr<unsigned char[]>& pData);
-    
+   
     Header& getHeader()
     {
         return myHeader;
@@ -74,7 +74,7 @@ private:
         DATA,
         END
     };
-    
+   
     State myState;
     Header myHeader;
     size_t myPayloadLength;

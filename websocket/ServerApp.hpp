@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   ServerApp.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on February 20, 2015, 8:50 PM
  */
@@ -45,12 +45,6 @@ public:
     virtual void send(std::vector<unsigned char> msg, int clientID) final;
     virtual void send(std::string msg, std::vector<int> clientIDs) final;
     virtual void send(std::vector<unsigned char> msg, std::vector<int> clientIDs) final;
-
-    // move message
-    virtual void send(std::string&& msg, int clientID) final;
-    virtual void send(std::vector<unsigned char>&& msg, int clientID) final;
-    virtual void send(std::string&& msg, std::vector<int> clientIDs) final;
-    virtual void send(std::vector<unsigned char>&& msg, std::vector<int> clientIDs) final;
 
     // close client
     virtual void close(int clientID) final;

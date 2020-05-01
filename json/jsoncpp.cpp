@@ -6,28 +6,28 @@
 // //////////////////////////////////////////////////////////////////////
 
 /*
-The JsonCpp library's source code, including accompanying documentation, 
+The JsonCpp library's source code, including accompanying documentation,
 tests and demonstration applications, are licensed under the following
 conditions...
 
-The author (Baptiste Lepilleur) explicitly disclaims copyright in all 
-jurisdictions which recognize such a disclaimer. In such jurisdictions, 
+The author (Baptiste Lepilleur) explicitly disclaims copyright in all
+jurisdictions which recognize such a disclaimer. In such jurisdictions,
 this software is released into the Public Domain.
 
 In jurisdictions which do not recognize Public Domain property (e.g. Germany as of
 2010), this software is Copyright (c) 2007-2010 by Baptiste Lepilleur, and is
 released under the terms of the MIT License (see below).
 
-In jurisdictions which recognize Public Domain property, the user of this 
-software may choose to accept it either as 1) Public Domain, 2) under the 
-conditions of the MIT License (see below), or 3) under the terms of dual 
+In jurisdictions which recognize Public Domain property, the user of this
+software may choose to accept it either as 1) Public Domain, 2) under the
+conditions of the MIT License (see below), or 3) under the terms of dual
 Public Domain/MIT License conditions described here, as they choose.
 
 The MIT License is about as close to Public Domain as a license can get, and is
 described in clear, concise terms at:
 
    http://en.wikipedia.org/wiki/MIT_License
-   
+  
 The full text of the MIT License follows:
 
 ========================================================================
@@ -2255,7 +2255,7 @@ ValueIteratorBase::computeDistance(const SelfType& other) const {
   // RogueWave STL,
   // which is the one used by default).
   // Using a portable hand-made version for non random iterator instead:
-  //   return difference_type( std::distance( current_, other.current_ ) );
+  //   return difference_type(std::distance(current_, other.current_));
   difference_type myDistance = 0;
   for (Value::ObjectValues::iterator it = current_; it != other.current_;
        ++it) {
@@ -2687,7 +2687,7 @@ bool Value::CZString::isStaticString() const { return storage_.policy_ == noDupl
 // //////////////////////////////////////////////////////////////////
 
 /*! \internal Default constructor initialization must be equivalent to:
- * memset( this, 0, sizeof(Value) )
+ * memset(this, 0, sizeof(Value))
  * This optimization is used in ValueInternalMap fast allocator.
  */
 Value::Value(ValueType type) {
@@ -2929,7 +2929,7 @@ bool Value::operator>=(const Value& other) const { return !(*this < other); }
 bool Value::operator>(const Value& other) const { return other < *this; }
 
 bool Value::operator==(const Value& other) const {
-  // if ( type_ != other.type_ )
+  // if (type_ != other.type_)
   // GCC 2.95.3 says:
   // attempt to take address of bit-field structure member `Json::Value::type_'
   // Beats me, but a temp solves the problem.
@@ -3567,11 +3567,11 @@ Value::Members Value::getMemberNames() const {
 // EnumMemberNames
 // Value::enumMemberNames() const
 //{
-//   if ( type_ == objectValue )
+//   if (type_ == objectValue)
 //   {
-//      return CppTL::Enum::any(  CppTL::Enum::transform(
-//         CppTL::Enum::keys( *(value_.map_), CppTL::Type<const CZString &>() ),
-//         MemberNamesTransform() ) );
+//      return CppTL::Enum::any( CppTL::Enum::transform(
+//         CppTL::Enum::keys(*(value_.map_), CppTL::Type<const CZString &>()),
+//         MemberNamesTransform()));
 //   }
 //   return EnumMemberNames();
 //}
@@ -3580,9 +3580,9 @@ Value::Members Value::getMemberNames() const {
 // EnumValues
 // Value::enumValues() const
 //{
-//   if ( type_ == objectValue  ||  type_ == arrayValue )
-//      return CppTL::Enum::anyValues( *(value_.map_),
-//                                     CppTL::Type<const Value &>() );
+//   if (type_ == objectValue  ||  type_ == arrayValue)
+//      return CppTL::Enum::anyValues(*(value_.map_),
+//                                     CppTL::Type<const Value &>());
 //   return EnumValues();
 //}
 //
@@ -4253,8 +4253,14 @@ void FastWriter::writeValue(const Value& value) {
     document_ += valueToString(value.asDouble());
     break;
   case stringValue:
-    document_ += valueToQuotedString(value.asCString());
+  {
+    // Is NULL possible for value.string_?
+    char const* str;
+    char const* end;
+    bool ok = value.getString(&str, &end);
+    if (ok) document_ += valueToQuotedStringN(str, static_cast<unsigned>(end-str));
     break;
+  }
   case booleanValue:
     document_ += valueToString(value.asBool());
     break;
@@ -4318,7 +4324,7 @@ void StyledWriter::writeValue(const Value& value) {
     break;
   case stringValue:
   {
-    // Is NULL is possible for value.string_?
+    // Is NULL possible for value.string_?
     char const* str;
     char const* end;
     bool ok = value.getString(&str, &end);
@@ -4535,8 +4541,15 @@ void StyledStreamWriter::writeValue(const Value& value) {
     pushValue(valueToString(value.asDouble()));
     break;
   case stringValue:
-    pushValue(valueToQuotedString(value.asCString()));
+  {
+    // Is NULL possible for value.string_?
+    char const* str;
+    char const* end;
+    bool ok = value.getString(&str, &end);
+    if (ok) pushValue(valueToQuotedStringN(str, static_cast<unsigned>(end-str)));
+    else pushValue("");
     break;
+  }
   case booleanValue:
     pushValue(valueToString(value.asBool()));
     break;

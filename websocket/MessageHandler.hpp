@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   MessageHandler.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on March 11, 2015, 7:48 PM
  */

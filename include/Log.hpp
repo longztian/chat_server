@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   Log.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on February 16, 2015, 10:05 PM
  */
@@ -14,8 +14,8 @@
 #include <iomanip>
 
 #ifdef DEBUG
-#define LOG_DEBUG if(true) Log::Debug( this, __PRETTY_FUNCTION__, __FILE__, __LINE__ )
-#define LOG_SDEBUG if(true) Log::Debug( nullptr, __PRETTY_FUNCTION__, __FILE__, __LINE__ )
+#define LOG_DEBUG if(true) Log::Debug(this, __PRETTY_FUNCTION__, __FILE__, __LINE__)
+#define LOG_SDEBUG if(true) Log::Debug(nullptr, __PRETTY_FUNCTION__, __FILE__, __LINE__)
 #endif
 
 #define LOG_INFO if(true) Log::Info()

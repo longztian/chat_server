@@ -1,12 +1,12 @@
 /*
-Christophe Devine 
+Christophe Devine
 c.devine@cr0.net
 http://www.cr0.net:8040/code/crypto/
 */
 #ifndef _SHA1_H
 #define _SHA1_H
 
-/* by IKKI
+/* @long
 #ifndef uint8
 #define uint8  unsigned char
 #endif
@@ -23,16 +23,16 @@ typedef struct
 }
 sha1_context;
 
-void sha1_starts( sha1_context *ctx );
-void sha1_update( sha1_context *ctx, uint8 *input, uint32 length );
-void sha1_finish( sha1_context *ctx, uint8 digest[20] );
+void sha1_starts(sha1_context *ctx);
+void sha1_update(sha1_context *ctx, uint8 *input, uint32 length);
+void sha1_finish(sha1_context *ctx, uint8 digest[20]);
 
  */
 
 #include <string>
 namespace sha1
 {
-    void hash( unsigned char* input, size_t length, unsigned char* output );
+    void hash(unsigned char* input, size_t length, unsigned char* output);
 }
 
 #endif /* sha1.h */

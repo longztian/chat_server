@@ -2,16 +2,16 @@
  * Copyright (c) 2003 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- * 
+ *
  * Copyright (c) 1999-2003 Apple Computer, Inc.  All Rights Reserved.
- * 
+ *
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- * 
+ *
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -19,7 +19,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- * 
+ *
  * @APPLE_LICENSE_HEADER_END@
  */
 /* ====================================================================
@@ -82,7 +82,7 @@
 /* Base64 encoder/decoder. Originally Apache file ap_base64.c
  */
 
-/* by IKKI
+/* @long
 #include <string.h>
 
 #include "base64.h"
@@ -117,7 +117,7 @@ static const unsigned char pr2six[256] =
     64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64
 };
 
-/* IKKI
+/* @long
 int Base64decode_len(const char *bufcoded)
 {
     int nbytesdecoded;
@@ -146,7 +146,7 @@ int Base64decode_len(const char *bufcoded, int len)
     return ((nprbytes + 3) / 4) * 3 - ((4 - nprbytes%4) & 3);
 }
 
-// IKKI int Base64decode(char *bufplain, const char *bufcoded)
+// @long int Base64decode(char *bufplain, const char *bufcoded)
 int Base64decode(const char *bufcoded, int len, char *bufplain)
 {
     int nbytesdecoded;
@@ -154,10 +154,10 @@ int Base64decode(const char *bufcoded, int len, char *bufplain)
     register unsigned char *bufout;
     register int nprbytes;
 
-    /* IKKI
+    /* @long
     bufin = (const unsigned char *) bufcoded;
     while (pr2six[*(bufin++)] <= 63);
-    nprbytes = (bufin - (const unsigned char *) bufcoded) - 1;    
+    nprbytes = (bufin - (const unsigned char *) bufcoded) - 1;   
      */
     bufin = (const unsigned char *) (bufcoded+len);
     nprbytes = len;
@@ -165,7 +165,7 @@ int Base64decode(const char *bufcoded, int len, char *bufplain)
     {
         if(*bufin != '=') return 0;
     }
-    
+   
     nbytesdecoded = ((nprbytes + 3) / 4) * 3;
 
     bufout = (unsigned char *) bufplain;
@@ -196,7 +196,7 @@ int Base64decode(const char *bufcoded, int len, char *bufplain)
         (unsigned char) (pr2six[bufin[2]] << 6 | pr2six[bufin[3]]);
     }
 
-    // IKKI *(bufout++) = '\0';
+    // @long *(bufout++) = '\0';
     nbytesdecoded -= (4 - nprbytes) & 3;
     return nbytesdecoded;
 }
@@ -206,7 +206,7 @@ static const char basis_64[] =
 
 int Base64encode_len(int len)
 {
-    // IKKI return ((len + 2) / 3 * 4) + 1;
+    // @long return ((len + 2) / 3 * 4) + 1;
     return ((len + 2) / 3 * 4);
 }
 
@@ -239,7 +239,7 @@ int Base64encode(const char *string, int len, char *encoded)
     *p++ = '=';
     }
 
-    // IKKI *p++ = '\0';
+    // @long *p++ = '\0';
     return p - encoded;
 }
 
@@ -248,52 +248,52 @@ int Base64encode(const char *string, int len, char *encoded)
 namespace base64
 {
 
-    /* IKKI
+    /* @long
      * TODO: we are converting size_t to int when calling internal functions
      */
-    size_t encode_len( size_t len )
+    size_t encode_len(size_t len)
     {
-        return Base64encode_len( len );
+        return Base64encode_len(len);
     }
 
-    size_t encode( const char *input, size_t len, char *output )
+    size_t encode(const char *input, size_t len, char *output)
     {
-        return Base64encode( input, len, output );
+        return Base64encode(input, len, output);
     }
 
-    size_t decode_len( const char *input, size_t len )
+    size_t decode_len(const char *input, size_t len)
     {
-        return Base64decode_len( input, len );
+        return Base64decode_len(input, len);
     }
 
-    size_t decode( const char *input, size_t len, char *output )
+    size_t decode(const char *input, size_t len, char *output)
     {
-        return Base64decode( input, len, output );
+        return Base64decode(input, len, output);
     }
 
-    std::string encode( const std::string& text )
+    std::string encode(const std::string& text)
     {
-        size_t size = Base64encode_len( text.size( ) );
-        std::string ret( size, '\0' );
-        char* buf = const_cast<char*> (ret.c_str( ));
-        size_t count = Base64encode( text.c_str( ), text.size( ), buf );
-        if ( count != size )
+        size_t size = Base64encode_len(text.size());
+        std::string ret(size, '\0');
+        char* buf = const_cast<char*> (ret.c_str());
+        size_t count = Base64encode(text.c_str(), text.size(), buf);
+        if (count != size)
         {
-            ret.clear( );
+            ret.clear();
         }
 
         return ret;
     }
 
-    std::string decode( const std::string& text )
+    std::string decode(const std::string& text)
     {
-        size_t size = Base64decode_len( text.c_str( ), text.size( ) );
-        std::string ret( size, '\0' );
-        char* buf = const_cast<char*> (ret.c_str( ));
-        size_t count = Base64decode( text.c_str( ), text.size( ), buf );
-        if ( count != size )
+        size_t size = Base64decode_len(text.c_str(), text.size());
+        std::string ret(size, '\0');
+        char* buf = const_cast<char*> (ret.c_str());
+        size_t count = Base64decode(text.c_str(), text.size(), buf);
+        if (count != size)
         {
-            ret.clear( );
+            ret.clear();
         }
 
         return ret;

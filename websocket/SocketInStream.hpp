@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   SocketInStream.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on March 1, 2015, 12:24 PM
  */
@@ -89,11 +89,14 @@ private:
         void clear();
 
     private:
-        static std::deque<std::unique_ptr<unsigned char[] >> pool;
+        static std::deque<std::unique_ptr<unsigned char[]>> pool;
 
         unsigned char* pData;
         unsigned char* pBegin;
         unsigned char* pEnd;
+        // use Int32 position instead
+        // int32_t  dataOffset;
+        // int32_t  spaceOffset;
     };
 
     size_t mySize;

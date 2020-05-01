@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   Channel.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on April 3, 2015, 10:18 PM
  */
@@ -9,8 +9,6 @@
 #define	CHANNEL_HPP
 
 #include <memory>
-
-class User;
 
 namespace chat {
 
@@ -26,9 +24,15 @@ public:
     Channel& operator=(Channel&& other);
 
     ~Channel();
+   
+    void removeUser(int socket)
+    {
+       
+    }
 
 private:
-    std::vector<std::weak_ptr<User>> users;
+    int id;
+    std::vector<int> users;
 };
 
 } // namespace chat

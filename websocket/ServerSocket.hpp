@@ -1,6 +1,6 @@
-/* 
+/*
  * File:   ServerSocket.hpp
- * Author: ikki
+ * Author: Longzhang Tian
  *
  * Created on February 18, 2015, 11:59 PM
  */
